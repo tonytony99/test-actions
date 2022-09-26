@@ -1,0 +1,20 @@
+name: Tests
+on: [push]
+jobs:
+  tests:
+    name: Tests
+    runs-on: "ubuntu-latest"
+    defaults:
+      run:
+        shell: bash -l {0}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: conda-incubator/setup-miniconda@v2
+        with:
+          activate-environment: test-actions
+          environment-file: env.yml
+          auto-activate-base: false
+      - name: Run tests
+        run: |
+          conda activate test-actions
+          coverage run -m unittest
