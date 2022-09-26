@@ -18,3 +18,8 @@ jobs:
         run: |
           conda activate test-actions
           coverage run -m unittest
+          coverage lcov
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
